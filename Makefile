@@ -3,14 +3,13 @@ CFLAGS      = -std=c++11 -pedantic -g -Wall -Wextra -Werror #-fsanitize=address
 CC			= c++
 RM          = rm -f
 SRCS_PATH	= src/
-POOL_PATH	= Pool/
 
 OBJS_PATH	= obj/
 DEPS_PATH	= deps/
 
-MAKE_OBJ_DIR	=	$(OBJS_PATH) $(addprefix $(OBJS_PATH), $(POOL_PATH))  \
+MAKE_OBJ_DIR	=	$(OBJS_PATH) #$(addprefix $(OBJS_PATH), $())  \
 								\
-					$(addprefix $(DEPS_PATH), $(POOL_PATH))  
+					$(addprefix $(DEPS_PATH), $())  
 INCS        = -I./includes
 
 
@@ -30,12 +29,10 @@ LIGHT_GREEN = \033[1;92m
 
 ###
 
-POOL			=	pool.cpp
-
-POOL_FILES		=	$(addprefix $(POOL_PATH), $(POOL))
 
 
-SRC				+=	$(POOL_FILES) 
+
+#SRC				+=	$(POOL_FILES) 
 				
 DEPS			= 	$(addprefix $(DEPS_PATH), $(SRC:.cpp=.d))
 
