@@ -81,9 +81,8 @@ DataBuffer& DataBuffer::operator>>(string& str)
     *this >> length;
     if (buffer.size() < length) 
     {
-        throw std::runtime_error("Not enough data in buffer to extract string");
+        throw std::runtime_error("Not enough data in buffer");
     }
-
     str.assign(buffer.begin(), buffer.begin() +  length);
     buffer.erase(buffer.begin(), buffer.begin() + length);
     return *this;
@@ -94,6 +93,10 @@ DataBuffer& DataBuffer::operator>>(vector<T>& vec)
     size_t size;
     *this >> size;
 
+    if (buffer.size() < size) 
+    {
+        throw std::runtime_error("Not enough data in buffer");
+    }
     vec.resize(size);
     for (size_t i = 0; i < size; ++i) 
     {

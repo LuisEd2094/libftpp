@@ -1,4 +1,4 @@
-#include "memento.hpp"
+#include <memento.hpp>
 #include <iostream>
 
 class TestClass : public Memento {
@@ -7,6 +7,7 @@ class TestClass : public Memento {
 public:
     int x;
     std::string y;
+    
 
 private:
     void _saveToSnapshot(Snapshot& snapshotToFill) override {
@@ -26,6 +27,9 @@ int main() {
 
     // Save the current state
     TestClass::Snapshot savedState = myObject.save();
+
+    std::cout << "Initial state: x = " << myObject.x << ", y = " << myObject.y << std::endl;
+
 
     // Modify the object
     myObject.x = 100;
