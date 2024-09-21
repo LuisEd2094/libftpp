@@ -1,4 +1,4 @@
-#include "data_buffer.hpp" // Assuming your DataBuffer is defined in this header
+#include <data_buffer.hpp> // Assuming your DataBuffer is defined in this header
 #include <iostream>
 #include <string>
 #include <exception>
@@ -21,6 +21,14 @@ public:
 
 int main() {
     DataBuffer myBuffer;
+ 
+    ComplexObject complex;
+    ComplexObject complex1(vector<string>(10,"Adios"));
+
+    myBuffer << complex;
+
+    myBuffer >> complex1;
+
 
     TestObject obj1;
     obj1.x = 42;
