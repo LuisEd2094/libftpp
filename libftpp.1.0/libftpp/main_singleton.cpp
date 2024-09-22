@@ -1,11 +1,11 @@
 #include <iostream>
-#include "singleton.hpp"
+#include <singleton.hpp>
 
 class MyClass {
 public:
 	MyClass(int value)
 	{
-		spk::cout << "MyClass constructor, with value [" << value << "]" << std::endl;
+		std::cout << "MyClass constructor, with value [" << value << "]" << std::endl;
 	}
 
     void printMessage() {
@@ -22,14 +22,14 @@ int main() {
         std::cout << "Exception: " << e.what() << std::endl; // Output: "Exception: Instance not yet created"
     }
 
-    Singleton<MyClass>::instantiate(42); // Setting up the instance
+    Singleton<MyClass>::instanciate(42); // Setting up the instance
 
     Singleton<MyClass>::instance()->printMessage(); // Output: "Hello from MyClass"
 
     try
     {
         // This should throw an exception as instance is already created
-        Singleton<MyClass>::instantiate(100);
+        Singleton<MyClass>::instanciate(100);
     } catch (const std::exception& e) {
         std::cout << "Exception: " << e.what() << std::endl; // Output: "Exception: Instance already created"
     }
