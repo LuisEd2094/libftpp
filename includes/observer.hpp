@@ -14,7 +14,23 @@ class Observer
     public:
         void subscribe(const TEvent& event, const function<void()>& lambda);
         void notify(const TEvent& event);
+        bool empty();
+        bool has_event(TEvent);
 };
+
+template<typename TEvent>
+bool Observer<TEvent>::has_event(TEvent event)
+{
+    return !this->observers[event].empty();
+};
+
+
+template<typename TEvent>
+bool Observer<TEvent>::empty()
+{
+    return this->observers.empty();
+};
+
 
 template<typename TEvent>
 void Observer<TEvent>::subscribe(const TEvent& event, const function<void()>& lambda)
