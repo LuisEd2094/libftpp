@@ -52,6 +52,9 @@
         "typeinfo": "cpp",
         "cstring": "cpp",
         "map": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "condition_variable": "cpp",
+        "mutex": "cpp",
+        "sstream": "cpp"
     }
 }

@@ -1,8 +1,7 @@
 #include <iostream>
 #include <thread>
-#include "thread_safe_iostream.hpp"
+#include <thread_safe_iostream.hpp>
 
-ThreadSafeIOStream threadSafeCout;
 
 void printNumbers(const std::string& p_prefix) {
     threadSafeCout.setPrefix(p_prefix);
