@@ -18,7 +18,15 @@ class ThreadSafeQueue
         void push_front(const TType& newElement);
         TType pop_back();
         TType pop_front();
+        bool    empty() const;
 };
+
+template<typename TType>
+bool    ThreadSafeQueue<TType>::empty() const
+{
+    return this->thread_queue.empty();
+}
+
 
 template<typename TType>
 void ThreadSafeQueue<TType>::push_back(const TType& newElement)

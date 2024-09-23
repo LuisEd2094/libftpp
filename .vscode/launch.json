@@ -108,6 +108,43 @@
                     "ignoreFailures": true
                 }
             ]
+        },
+        {
+            "name": "Debug worker pool",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/executable", // Update with your executable path
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb", // or "lldb" for macOS
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build worker pool", // Make sure to define this task
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Enable thread debugging",
+                    "text": "set print thread-events on",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Enable showing thread information when switching",
+                    "text": "set scheduler-locking on",
+                    "ignoreFailures": true
+                }
+            ]
         }
     ]
 }

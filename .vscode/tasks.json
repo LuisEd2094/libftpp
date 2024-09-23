@@ -72,6 +72,24 @@
             },
             "problemMatcher": ["$gcc"],
             "detail": "Generated task by C/C++ extension"
+        },
+        {
+            "label": "build worker pool",
+            "type": "shell",
+            "command": "c++",
+            "args": [
+                "-g",
+                "${workspaceFolder}/libftpp.1.0/libftpp/main_worker_pool.cpp", // Update with your source file
+                "-I${workspaceFolder}/includes/",
+                "-o",
+                "${workspaceFolder}/executable" // Update with your desired output executable path
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Generated task by C/C++ extension"
         }
     ]
 }

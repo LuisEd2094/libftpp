@@ -4,6 +4,7 @@
 #include <thread_safe_iostream.hpp>
 
 void myFunction1() {
+    std::this_thread::sleep_for(std::chrono::seconds(0)); // Wait for jobs to finish
     for (int i = 0; i < 5; ++i) {
         threadSafeCout << "Hello from Function1, iteration " << i << std::endl;
     }
@@ -19,26 +20,10 @@ int main() {
     Thread thread1("Thread1", myFunction1);
     Thread thread2("Thread2", myFunction2);
 
-    try
-    {
-        thread1.stop();
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-    thread1.start();
-    try
-    {
-        thread1.start();
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-    
-    thread2.start();
 
+
+    thread1.start();
+    thread2.start();
     thread1.stop();
     thread2.stop();
 

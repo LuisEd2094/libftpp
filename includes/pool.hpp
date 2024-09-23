@@ -22,9 +22,14 @@ class Pool{
     void    resize(const size_t& numberOfObjects);
     size_t  size();
     size_t  capacity();
+    typename std::vector<TType*>::iterator end();
+    typename std::vector<TType*>::iterator begin();
 
     template<typename... TArgs>
     Object acquire(TArgs&&... args);
+
+    template<typename... TArgs>
+    Pool(size_t num, TArgs&&... args); 
 
     ~Pool(); // Destructor declaration
     private:
@@ -33,6 +38,14 @@ class Pool{
     
 };
 
+template<typename TType>
+template<typename... TArgs>
+Pool<TType>::Pool(size_t num, TArgs&&... args) {
+    // Initialize the pool with num objects of TType
+    for (size_t i = 0; i < num; ++i) {
+        pool.push_back(new TType(forward<TArgs>(args)...)); // Construct TType with args
+    }
+}
 
 template<typename TType>
 Pool<TType>::Object::Object(TType* ptr, function<void(TType*)> deleter) :
@@ -62,6 +75,17 @@ template<typename TType>
 size_t Pool<TType>::capacity()
 {
     return this->pool.capacity();
+}
+
+template<typename TType>
+typename std::vector<TType*>::iterator Pool<TType>::end()
+{
+    return this->pool.end();
+}
+template<typename TType>
+typename std::vector<TType*>::iterator Pool<TType>::begin()
+{
+    return this->pool.begin();
 }
 
 /**
