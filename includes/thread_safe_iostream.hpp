@@ -95,7 +95,6 @@ std::stringstream& ThreadSafeIOStream::threadLocalBuffer()
     static thread_local std::stringstream buffer;
     if (is_empty)
     {
-        std::cout << threadLocalPrefix << std::endl;
         if (threadLocalPrefix.empty())
             threadLocalPrefix = "[Thread " + to_string(thread_number++) + "]";
         buffer << threadLocalPrefix;
