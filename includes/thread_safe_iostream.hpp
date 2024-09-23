@@ -18,6 +18,7 @@ private:
     std::ostream&   outputStream;
     std::istream&   inputStream;
     std::mutex      mutex;
+    static int      thread_number; 
     thread_local static std::string threadLocalPrefix;
     thread_local static bool     is_empty;
 
@@ -44,6 +45,8 @@ ThreadSafeIOStream::ThreadSafeIOStream(std::ostream& outStream = std::cout, std:
 void ThreadSafeIOStream::setPrefix(const std::string& prefix)
 {
     this->threadLocalPrefix = prefix;
+    if (prefix.back() != ' ')
+        this->threadLocalPrefix += " ";
 }
 
 template <typename T>
@@ -90,10 +93,15 @@ ThreadSafeIOStream& ThreadSafeIOStream::operator>>(T& data) {
 std::stringstream& ThreadSafeIOStream::threadLocalBuffer() 
 {
     static thread_local std::stringstream buffer;
-    if (!threadLocalPrefix.empty() && is_empty)
+    if (is_empty)
+    {
+        if (threadLocalPrefix.empty())
+            threadLocalPrefix = "[Thread " + to_string(thread_number++) + "]";
         buffer << threadLocalPrefix;
+    }
     return buffer;
 }
+int ThreadSafeIOStream::thread_number = 0; 
 
 thread_local ThreadSafeIOStream threadSafeCout(std::cout, std::cin);
 thread_local std::string ThreadSafeIOStream::threadLocalPrefix = "";
