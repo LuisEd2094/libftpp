@@ -1,6 +1,6 @@
 #include <iostream>
 #include <thread>
-#include "thread_safe_queue.hpp"
+#include <thread_safe_queue.hpp>
 
 void testPush(ThreadSafeQueue<int>& p_queue, int p_value) {
     p_queue.push_back(p_value);

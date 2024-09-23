@@ -17,7 +17,7 @@ class ThreadSafeIOStream
 private:
     std::ostream&   outputStream;
     std::istream&   inputStream;
-    std::mutex mutex;
+    std::mutex      mutex;
     thread_local static std::string threadLocalPrefix;
     thread_local static bool     is_empty;
 
